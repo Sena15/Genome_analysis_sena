@@ -1,0 +1,34 @@
+#!/bin/bash -l
+
+#SBATCH -A uppmax2023-2-3
+#SBATCH -M snowy
+#SBATCH -p core
+#SBATCH -n 8
+#SBATCH -t 6:00:00
+#SBATCH -J HT_seq_33
+#SBATCH --mail-user sethuraman2001.ind@gmail.com
+#SBATCH --mail-type=ALL
+
+# Load modules
+module load bioinfo-tools
+module load htseq/0.9.1
+
+# Your commands
+bam_file_dir=/home/sena15/genome_analysis/analyses/bwa_alignment/33/
+gff_file_dir=/home/sena15/genome_analysis/analyses/prokka_results/SRR4342133_annotations/
+output=/home/sena15/genome_analysis/analyses/HTseq_results/33/
+
+mkdir -p /home/sena15/genome_analysis/analyses/read_counts1
+
+for n in 4 11
+do
+        htseq-count -f bam -r pos -t CDS -i ID --stranded=no ${bam_file_dir}/${n}_map_37_sorted.bam <(sed '/##FASTA/,$d' ${gff_file_dir}/bin_${n}/annotation_bin${n}.gff) > ${output}/${n}_37.out
+        htseq-count -f bam -r pos -t CDS -i ID --stranded=no ${bam_file_dir}/${n}_map_39_sorted.bam <(sed '/##FASTA/,$d' ${gff_file_dir}/bin_${n}/annotation_bin${n}.gff) > ${output}/${n}_39.out
+done
+
+for n in 1 2 3 5 6 7 8 9 10 12 13 14 15 16 17 18 19 20 21 22 23
+do
+        htseq-count -f bam -r pos -t CDS -i ID --stranded=no ${bam_file_dir}/${n}_map_37_sorted.bam <(sed '/##FASTA/,$d' ${gff_file_dir}/bin_${n}/annotation_bin${n}.gff) > ${output}/${n}_37.out
+        htseq-count -f bam -r pos -t CDS -i ID --stranded=no ${bam_file_dir}/${n}_map_39_sorted.bam <(sed '/##FASTA/,$d' ${gff_file_dir}/bin_${n}/annotation_bin${n}.gff) > ${output}/${n}_39.out
+done
+

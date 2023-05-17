@@ -1,0 +1,4 @@
+#megahit command 
+
+megahit --kmin-1pass --k-list 59,79,99 -1 SRR4342129_1.paired.trimmed.fastq.gz -2 SRR4342129_2.paired.trimmed.fastq.gz -o SRR4342129_megahit_outfile
+megahit --kmin-1pass --k-list 59,79,99 -1 SRR4342133_1.paired.trimmed.fastq.gz -2 SRR4342133_2.paired.trimmed.fastq.gz -o SRR4342133_megahit_outfile
