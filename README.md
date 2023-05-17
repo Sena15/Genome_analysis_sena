@@ -1,2 +1,2 @@
-# Genome_analysis_sena
-these files supports the work that carried out during the project.
+# Genome_analysis
+these folders contains files that supports the work that carried out during the project.
